@@ -1,0 +1,92 @@
+<div class="main-container">
+
+  <div class="container">
+    <h2>Add Event</h2>
+<form  #userForm="ngForm" (ngSubmit)="submitLog(userLogModel, userForm)">
+    <div class="form-group">
+      <label for="UserId">Type:</label>
+      <select name="type" class="form-control" [(ngModel)]="userLogModel.type"
+      name="type" required>
+        <option value="Login">Login</option>
+        <option value="Logout">Logout</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="UserId">UserId:</label>
+      <input type="text" class="form-control"
+      [(ngModel)]="userLogModel.userId"
+       id="userId"  name="userId" required> 
+    </div>
+  
+    <button type="submit" [disabled]="!userForm.form.valid" class="btn btn-primary">Submit</button>
+  </form>
+  </div>
+
+
+
+ <div class="container custom-containers">
+   <div >
+    <h2>User Event Logs</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>User ID</th>
+          <th>TimeStamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="userLogs.length > 0">
+        <tr *ngFor="let user of userLogs; let i = index">
+          <td>{{user.type}}</td>
+          <td>{{user.userId}}</td>
+          <td>{{user.timeStamp}}</td>
+        </tr>
+        </ng-container>
+        <ng-container *ngIf="userLogs.length === 0">
+        <tr>
+         
+            <div>
+              No Data Available. 
+              </div>
+            
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+ </div>
+  </div>
+<div class="container custom-containers">
+    <button type="submit" class="btn btn-primary"
+    (click)="countActiveUsers()"
+    >Count Active Users</button>
+    <div class="custom-containers">
+    <ng-container *ngIf="groupByHour">
+      <div class="container">
+        <h2>Active Users</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Hour</th>
+              <th>User ID</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let hour of groupHourKeys">
+            <td><label>{{hour}}</label></td>
+            <div *ngFor="let user of this.groupByHour[hour]">
+              <td><ul>
+                <li>{{user?.userId}}</li>
+  
+                </ul>
+              </td>
+            </div>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      </ng-container>
+      </div>
+    </div>
+
+</div>

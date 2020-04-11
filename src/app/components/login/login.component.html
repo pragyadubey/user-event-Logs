@@ -1,0 +1,22 @@
+
+<div class="container">
+<div class="login-form">      
+            <form  (ngSubmit)="login()">
+                <h2>Sign in</h2>
+                <input type="text" id="email" name="email" [(ngModel)]="loginData.email" class="form-control"
+                       placeholder="email" required>
+                <input type="password" id="inputPassword" [(ngModel)]="loginData.password" name="inputPassword"
+                       class="form-control" placeholder="password" required>
+              
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                <br/>
+            
+                <div class="alert alert-danger" *ngIf="failure">
+                    <strong>Login Again</strong>
+                </div>
+
+            </form>
+     
+    
+</div>
+</div>
